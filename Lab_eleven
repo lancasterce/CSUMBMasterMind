@@ -174,9 +174,11 @@ def street():
 def secretRoom():
  currentLocation = 10
  if flashlight == 1:
-   choice=requestString("""secret room, SHIT TON OF BODIES...."")
+   choice=printNow("""You enter a dark secret room.You flick on the flashlight you took 
+from the garage and are horrified to see body parts hanging throughout the room.
+The smell of standing water and rotting flesh turns your stomach. You race back upstairs to vomit.""")
  else:
-   choice=requestString("""secret room, DARK""")
+   choice=printNow("You enter a dark secret room. It is pitch black in here and you can't see a thing.")
  movement(currentLocation,choice)
 
 def sandwich(currentLocation):
