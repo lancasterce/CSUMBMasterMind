@@ -6,6 +6,13 @@
 # - CST205 2014: Lab 11
 ############################################################
 
+flashlight = 0
+
+def flashlight(flashlight,someNumber):
+  flashlight = someNumber
+  return
+  
+
 def gamePlay():
   currentLocation = 7 
   choice=requestString("""Welcome to Murder on Maston Street,
@@ -17,7 +24,7 @@ def gamePlay():
     Good evening detective, quite the night for a murder mystery, eh?
     We have a body,face down in the bedroom. The storm knocked the power 
     out so watch your step. If you need anything let me know.
-    Do you wish to go forward, backward right or left?""")
+    Do you wish to go forward, backward right or left?""")    
   movement(currentLocation,choice)
     
 def movement(currentLocation,choice):
@@ -100,18 +107,28 @@ def bathRoom():
   movement(currentLocation,choice)
 
 def garage():
-  flashlight = 0
   currentLocation = 2 
-  choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
-  rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
-  here. On the wall is a collection of tools all hung in spots with outlines to 
-  insure proper placement. One tool appears to be missing and the outline is that 
-  of a large adjustable wrench. A fliashlight lies on the workbench You can move backward""")
+  if(flashlight == 0):
+    choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
+    rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
+    here. On the wall is a collection of tools all hung in spots with outlines to 
+    insure proper placement. One tool appears to be missing and the outline is that 
+    of a large adjustable wrench. A flashlight lies on the workbench. You can move backward""")
+  else:
+    choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
+    rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
+    here. On the wall is a collection of tools all hung in spots with outlines to 
+    insure proper placement. One tool appears to be missing and the outline is that 
+    of a large adjustable wrench. You can move backward""")
+  
   if choice == "take":
-    flashlight = 1
+    flashlight(flashlight,1)
     print("you take the flashlight.")
-  else 
-  movement(currentLocation,choice)
+    currentLocation = 4
+    choice = "forward"
+    movement(currentLocation,choice)
+  else:
+    movement(currentLocation,choice)
 
 def bedRoom():
   currentLocation = 3 
@@ -129,7 +146,7 @@ def livingRoom():
   if choice == "move":
     secretRoom()
   else:
-  movement(currentLocation,choice)
+    movement(currentLocation,choice)
 
 def kitchen():
   currentLocation = 5 
@@ -227,8 +244,7 @@ def help(currentLocation):
     right
     left
     eat
-    look
-    
+    look 
     pick
     use
     move
