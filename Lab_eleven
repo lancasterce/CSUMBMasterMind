@@ -6,8 +6,11 @@
 # - CST205 2014: Lab 11
 ############################################################
 
+##Main game play function, starts the game off and sets initial variable values.
 def gamePlay():
+## setting initial location to 7, which on the map is the front porch
   currentLocation = 7 
+  ##request input where the player would like to go next
   choice=requestString("""Welcome to Murder on Maston Street,
     In each room you will be told which directions you can go, '
     You'll be able to go forward, backward, right, or left by typing that direction "
@@ -18,8 +21,11 @@ def gamePlay():
     We have a body,face down in the bedroom. The storm knocked the power 
     out so watch your step. If you need anything let me know.
     Do you wish to go forward, backward right or left?""")
+  ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-    
+
+##Movement function, this is the engine which allows the movement through the house. 
+##It is called everytime the player chooses a direction to move    
 def movement(currentLocation,choice):
   while choice in ('forward','backward','right','left','eat','move','use','help','listen','solve','look','exit'):
     if currentLocation == 1 and choice == 'backward':
@@ -91,17 +97,20 @@ def movement(currentLocation,choice):
     break;
     tryAgain(currentLocation)
 
-    
+ ## Rooms: The following functions represent each room and ask the player for action in each, then a call to movement is made   
 def bathRoom():
   currentLocation = 1 
+  ##request input where the player would like to go next
   choice=requestString("""The bathroom is clean and tidy just as the rest of the home. 
   On the floor lies an open bottle of tums with the contents strewn across the floor. 
   They are the mint kind, yuck! You can move backward.""")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+ ## Rooms: See above
 def garage():
   flashlight = 0
   currentLocation = 2 
+  ##request input where the player would like to go next
   choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
   rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
   here. On the wall is a collection of tools all hung in spots with outlines to 
@@ -111,17 +120,21 @@ def garage():
     flashlight = 1
     print("you take the flashlight.")
   else 
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+ ## Rooms: See above
 def bedRoom():
   currentLocation = 3 
+  ##request input where the player would like to go next
   choice=requestString("""You stand in a dark bedroom. The bed is still made and a body lies 
   face-down on the floor. There does not appear to have been a struggle and 
   no marks are visible on the body. You can move forward or right.""")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+   ## Rooms: See above
 def livingRoom():
   currentLocation = 4 
+  ##request input where the player would like to go next
   choice=requestString("""You stand in silence, listening to the rain as blue and red flashes of light from the squad 
   cars outside play blinding games on the walls of the living room. You notice a clock stopped at 10:57 
   on the wall and the smell of standing water assaults your nose. There is a door to the forward, an 
@@ -129,97 +142,118 @@ def livingRoom():
   if choice == "move":
     secretRoom()
   else:
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+ ## Rooms: See above
 def kitchen():
   currentLocation = 5 
+  ##request input where the player would like to go next
   choice=requestString("""The kitchen is immaculate with the exception of a half-eaten 
   sandwich on the counter. A cat clock on the wall swings its tail and 
   eyes to the passing of time. On the refrigerator are pictures held to 
   the surface by various magnets. A window looking out onto the street 
   is broken but the floor under the window is spotless. You can move left.""")
-  
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+   ## Rooms: See above
 def lawn():
   currentLocation = 6
+  ##request input where the player would like to go next
   choice=requestString("""You are on the front lawn of the home. It is nicely manicured 
   and a small garden gnome stares happily into the dark, rainy night. You can move right.""")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+   ## Rooms: See above
 def porch():
   currentLocation = 7
+  ##request input where the player would like to go next
   choice=requestString("""...You stand back on the porch of a small home in a suburb of Los Angeles. 
     It is cold and rainy and to the forward is a dark living room. 
     An officer stands next to you writing on a notepad. You can move forward, backward, right or left.""")
+      ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+ ## Rooms: See above
 def window():
   currentLocation = 8
+  ##request input where the player would like to go next
   choice=requestString("""You stand to the right (right) of the porch in a muddy planter. 
   The window above the planter is broken and markers placed by the officers 
   here before you indicate foot prints made in the mud under the window were 
   made by boot-covered feet. There is glass pieces scattered in the mud. 
   You can move left.""")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+   ## Rooms: See above
 def street():
   currentLocation = 9
+  ##request input where the player would like to go next
   choice=requestString("""There is nothing here but cold rain and parked squad cars with lights flashing. 
   It?s too early in the morning for anyone to be out but you do notice a few people peeking out 
   from behind drawn curtains of neighborhood homes. The officers you met here said they 
   interviewed everyone and no one saw or heard anything. You can move forward.""")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+  ## Rooms: See above 
 def secretRoom():
  currentLocation = 10
  if flashlight == 1:
+ ##request input where the player would like to go next
    choice=printNow("""You enter a dark secret room.You flick on the flashlight you took 
 from the garage and are horrified to see body parts hanging throughout the room.
 The smell of standing water and rotting flesh turns your stomach. You race back upstairs to vomit.""")
  else:
+ ##request input where the player would like to go next
    choice=printNow("You enter a dark secret room. It is pitch black in here and you can't see a thing.")
+     ##calls movement function which is the main function to move the player throughout the game
  movement(currentLocation,choice)
 
+##Objects/actions: the following are object or action functions that can occur in each room
 def sandwich(currentLocation):
+##request input where the player would like to go next
   choice=requestString('Don\'t eat that, it\'s poisoned!!!')
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+##Objects/actions: see above
 def moveBody(currentLocation):
+##request input where the player would like to go next
   choice=requestString("""When you move the body, it lets out a long breathy sigh. 
   You jump back initially but realize it is just air escaping the body. 
   There are no other signs of foul play on this body and the eyes of a 
   middle-aged man stare blankly up at you. """)
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-  
+  ##Objects/actions:
 def toilet(currentLocation):
+##request input where the player would like to go next
   choice=requestString("Ahh, much better! Now What?")
+    ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)
-
+##Objects/actions:
 def poison():
   printNow("You did it! Congratulations! Now, who the hell did perpetrated this horrible crime\?")
-  
+  ##Objects/actions:
 def solved(currentLocation):
+##request input where the player would like to go next
   choice=requestString("You figured out what happened, eh? Well, how was this person murdered\?")
   while choice in ("poison"):
     if currentLocation == 1 and choice == "poison":
         poison()
     tryAgain(currentLocation)
-
+##Objects/actions:
 def moveBody(currentLocation):
+##request input where the player would like to go next
   choice=requestString("""When you move the body, it lets out a long breathy sigh. 
   You jump back initially but realize it is just air escaping the body. 
   There are no other signs of foul play on this bod""")
-
+##Objects/actions:
 def tryAgain(currentLocation):
+##request input where the player would like to go next
   choice=requestString('Invalid choice Detective, you must start over. Enter Yes to Play again or No to Quit')
   if choice.lower().startswith("y"):
     gamePlay()
   if choice.lower().startswith("n"):
     print('Goodbye Detective')
- 
-  
-        
+ ##Objects/actions:
 def help(currentLocation):
   choice=requestString("""You can try: 
     forward
@@ -228,11 +262,10 @@ def help(currentLocation):
     left
     eat
     look
-    
-    pick
     use
     move
     help
     exit
     solve, so now what?""")
+      ##calls movement function which is the main function to move the player throughout the game
   movement(currentLocation,choice)    
