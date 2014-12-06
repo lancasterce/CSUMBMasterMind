@@ -110,8 +110,8 @@ def garage():
   if choice == "take":
     flashlight = 1
     print("you take the flashlight.")
-  else 
-  movement(currentLocation,choice)
+  else: 
+    movement(currentLocation,choice)
 
 def bedRoom():
   currentLocation = 3 
@@ -129,7 +129,7 @@ def livingRoom():
   if choice == "move":
     secretRoom()
   else:
-  movement(currentLocation,choice)
+    movement(currentLocation,choice)
 
 def kitchen():
   currentLocation = 5 
