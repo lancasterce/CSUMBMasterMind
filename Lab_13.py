@@ -14,18 +14,33 @@ def madLibs():
   for data in lines:
     i = 0
     lastIndex = len(data) - 1
-    prtString = ' '.join(data[:(lastIndex)])
-    printNow(prtString)
+    pString = (data[:(lastIndex)])
     numWords = data[lastIndex]
     while(i < numWords and j < 14):
-      for word in prtString:
-        if(word.startswith('[')): 
+      sentence = ' '.join(pString)
+      printNow(sentence)
+      for word in pString:
+        if(word.startswith('[')):
           askString = 'Enter a ' + word
           userInput = requestString(askString)
           userWords[j] = userInput
           j = j + 1
-      i = i + 1
-      
+        i = i + 1
+
+def madLibsMake():
+  j = 0
+  for data in lines:
+    i = 0
+    lastIndex = len(data) - 1
+    pString = (data[:(lastIndex)])
+    numWords = data[lastIndex]
+    while(i < lastIndex and j < 14):
+      for word in pString:
+        if(word.startswith('[')):
+          lines[i][j] = userWords[j]
+          j = j + 1
+        i = i + 1
+
 def testSwap():
   linear = ['\[This\]', 'fat', 'cow', 'is', 'third']
   print ' '.join(linear)
