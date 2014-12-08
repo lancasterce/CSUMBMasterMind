@@ -7,7 +7,9 @@ lines = [['It', 'was', 'the', 'movie', '[noun]', 'come', 'to', 'life.',1],
 ['The', '[noun]', 'passengers', 'suffered', 'from', 'both', 'from', '[noun]', 'and', '[noun].',3],
 ['The', 'cause', 'of', 'the', '[noun]', 'remains', 'under', 'investigation.',1]]
 
+test = ['Aliens', 'people', 'suddenly', 'screaming', 'space flight', 'mars', 'on', 'the moon', 'exomorph', 'panic', 'airlock', 'other', 'trauma', 'panic']
 userWords = [''] * 14
+lines2 = []
 
 def madLibs():
   j = 0
@@ -32,17 +34,18 @@ def madLibsMake():
   for data in lines:
     i = 0
     lastIndex = len(data) - 1
-    pString = (data[:(lastIndex)])
+    pString = data[:lastIndex]
     numWords = data[lastIndex]
-    while(i < lastIndex and j < 14):
+    while(i < (lastIndex - 1) and j < 14):
       for word in pString:
         if(word.startswith('[')):
-          lines[i][j] = userWords[j]
-          j = j + 1
+           pString[i] = userWords[j]
+           j = j + 1
         i = i + 1
-
-def testSwap():
-  linear = ['\[This\]', 'fat', 'cow', 'is', 'third']
-  print ' '.join(linear)
-  print linear[0].startswith('\[')
-  print linear[0].endswith('\]')
+    lines2.append(pString)
+  printIt(lines2)
+ 
+def printIt(theLines):
+  for phrase in lines2:
+   toPrint = ' '.join(phrase)
+   printNow(toPrint)
