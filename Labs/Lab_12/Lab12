@@ -1,257 +1,303 @@
-############################################################
-# - Murder on Mason Street
-# - by Ben Fox, Babak Rezai, James O'Dea, Caroline Lancaster
-# - text based adventure game
-# - CST205 2014: Lab 12
-############################################################
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
 
-flashlight = 0
-
-def flashlight(flashlight,someNumber):
-  flashlight = someNumber
-  return
-  
-def gamePlay():
-  currentLocation = 7 
-  choice=requestString("""Welcome to Murder on Maston Street,
-    In each room you will be told which directions you can go, '
-    You'll be able to go forward, backward, right, or left by typing that direction "
-    Type help to redisplay this introduction 
-    Type exit to quit at any time.
-     
-    Good evening detective, quite the night for a murder mystery, eh?
-    We have a body,face down in the bedroom. The storm knocked the power 
-    out so watch your step. If you need anything let me know.
-    Do you wish to go forward, backward right or left?""")   
-  while choice in ('forward','backward','right','left','help','solve','exit'):
-    movement(currentLocation,choice)
-  gamePlay()
- 
-    
-  
-def movement(currentLocation,choice):
-  while choice in ('forward','backward','right','left','eat','move','use','help','solve','exit'):
-    if currentLocation == 1 and choice == 'backward':
-        print ('okay, you move ' + choice)
-        bedRoom()
-    if currentLocation == 2 and choice == 'backward':
-        livingRoom() 
-        print ('okay, you move ' + choice)
-    if currentLocation == 3 and choice  == 'forward':
-        print ('okay, you move ' + choice)
-        bathRoom()
-    if currentLocation == 3 and choice  == 'right':
-        print ('okay, you move ' + choice)
-        livingRoom()
-    if currentLocation == 4 and choice  == 'forward':
-        print ('okay, you move ' + choice)
-        garage()
-    if currentLocation == 4 and choice  == 'right':
-        print ('okay, you move ' + choice)
-        kitchen()
-    if currentLocation == 4 and choice  == 'left':
-        print ('okay, you move ' + choice)
-        bedRoom() 
-    if currentLocation == 4 and choice  == 'backward':
-        print ('okay, you move ' + choice)
-        porch()     
-    if currentLocation == 5 and choice  == 'left':
-        print ('okay, you move ' + choice)
-        livingRoom()        
-    if currentLocation == 6 and choice  == 'right':
-        print ('okay, you move ' + choice) 
-        porch()  
-    if currentLocation == 7 and choice  == 'left':
-        print ('okay, you move ' + choice)
-        lawn()   
-    if currentLocation == 7 and choice  == 'forward':
-        print ('okay, you move ' + choice)   
-        livingRoom() 
-    if currentLocation == 7 and choice  == 'right':
-        print ('okay, you move ' + choice)   
-        window()  
-    if currentLocation == 7 and choice  == 'backward':
-        print ('okay, you move ' + choice)
-        street()    
-    if currentLocation == 8 and choice  == 'left':
-        print ('okay, you move ' + choice)  
-        porch()
-    if currentLocation == 9 and choice  == 'forward':
-        print ('okay, you move ' + choice) 
-        porch()   
-    if currentLocation == 5 and choice == 'eat':
-        print ('okay, detective, you need ' + choice) 
-        sandwich(currentLocation)
-    if currentLocation == 3 and choice == 'move':
-        print ('okay, detective, you ' + choice + ' the body') 
-        moveBody(currentLocation)
-    if currentLocation == 1 and choice == 'use':
-        print ('okay, detective, you  ' + choice + ' the toilet') 
-        toilet(currentLocation)
-    if choice == 'solve':
-        print ('okay, detective, you think you ' + choice + 'it') 
-        solved(currentLocation)
-    if choice == 'help':
-        help(currentLocation)
-    elif choice == "exit":
-       break
-        
-    
-def bathRoom():
-  currentLocation = 1 
-  choice=requestString("""The bathroom is clean and tidy just as the rest of the home. 
-  On the floor lies an open bottle of tums with the contents strewn across the floor. 
-  They are the mint kind, yuck! You can move backward.""")
-  while choice in ('backward','use','help','solve','exit'):
-    movement(currentLocation,choice)
-  bathRoom()
-
-def garage():
-  currentLocation = 2 
-  if(flashlight == 0):
-    choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
-    rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
-    here. On the wall is a collection of tools all hung in spots with outlines to 
-    insure proper placement. One tool appears to be missing and the outline is that 
-    of a large adjustable wrench. A flashlight lies on the workbench. You can move backward""")
-  else:
-    choice=requestString("""You\'ve entered the garage. It is quiet except for the feint sound of 
-    rain on the roof above. It smells of gasoline, exhaust and yard clippings in 
-    here. On the wall is a collection of tools all hung in spots with outlines to 
-    insure proper placement. One tool appears to be missing and the outline is that 
-    of a large adjustable wrench. You can move backward""")
-  
-  if choice == "take":
-    flashlight(flashlight,1)
-    print("you take the flashlight.")
-    currentLocation = 4
-    choice = "forward"
-    movement(currentLocation,choice)
-  else:
-    movement(currentLocation,choice)
-
-def bedRoom():
-  currentLocation = 3 
-  choice=requestString("""You stand in a dark bedroom. The bed is still made and a body lies 
-  face-down on the floor. There does not appear to have been a struggle and 
-  no marks are visible on the body. You can move forward or right.""")
-  while choice in ('forward','backward','right','left','help','solve','exit'):
-    movement(currentLocation,choice)
-  bedRoom()
-  
-def livingRoom():
-  currentLocation = 4 
-  choice=requestString("""You stand in silence, listening to the rain as blue and red flashes of light from the squad 
-  cars outside play blinding games on the walls of the living room. You notice a clock stopped at 10:57 
-  on the wall and the smell of standing water assaults your nose. There is a door to the forward, an 
-  entry to the kitchen to your right and a door to the left. You can move forward, backward, right or left.""")
-  while choice in ('forward','backward','right','left','help','solve','exit'):
-    if choice == "move":
-      secretRoom()
-    else:
-      movement(currentLocation,choice)
-
-def kitchen():
-  currentLocation = 5 
-  choice=requestString("""The kitchen is immaculate with the exception of a half-eaten 
-  sandwich on the counter. A cat clock on the wall swings its tail and 
-  eyes to the passing of time. On the refrigerator are pictures held to 
-  the surface by various magnets. A window looking out onto the street 
-  is broken but the floor under the window is spotless. You can move left.""")
-  while choice in ('left','help','solve','exit','eat'):
-    movement(currentLocation,choice)
-  kitchen()
-  
-def lawn():
-  currentLocation = 6
-  choice=requestString("""You are on the front lawn of the home. It is nicely manicured 
-  and a small garden gnome stares happily into the dark, rainy night. You can move right.""")
-  while choice in ('right','help','solve','exit'):
-    movement(currentLocation,choice)
-  lawn()
-    
-  
-def porch():
-  currentLocation = 7
-  choice=requestString("""...You stand back on the porch of a small home in a suburb of Los Angeles. 
-    It is cold and rainy and to the forward is a dark living room. 
-    An officer stands next to you writing on a notepad. You can move forward, backward, right or left.""")
-  while choice in ('right','left','forward','backward','help','solve','exit'):
-    movement(currentLocation,choice)
-  porch()
-
-def window():
-  currentLocation = 8
-  choice=requestString("""You stand to the right (right) of the porch in a muddy planter. 
-  The window above the planter is broken and markers placed by the officers 
-  here before you indicate foot prints made in the mud under the window were 
-  made by boot-covered feet. There is glass pieces scattered in the mud. 
-  You can move left.""")
-  while choice in ('left','help','solve','exit'):
-    movement(currentLocation,choice)
-  window()
-  
-def street():
-  currentLocation = 9
-  choice=requestString("""There is nothing here but cold rain and parked squad cars with lights flashing. 
-  It?s too early in the morning for anyone to be out but you do notice a few people peeking out 
-  from behind drawn curtains of neighborhood homes. The officers you met here said they 
-  interviewed everyone and no one saw or heard anything. You can move forward.""")
-  while choice in ('forward','help','solve','exit'):
-    movement(currentLocation,choice)
-  street()
-  
-def secretRoom():
- currentLocation = 10
- if flashlight == 1:
-   choice=printNow("""You enter a dark secret room.You flick on the flashlight you took 
-   from the garage and are horrified to see body parts hanging throughout the room.
-   The smell of standing water and rotting flesh turns your stomach. You race back upstairs to vomit.""")
- else:
-   choice=printNow("You enter a dark secret room. It is pitch black in here and you can't see a thing.")
- movement(currentLocation,choice)
-
-def sandwich(currentLocation):
-  choice=requestString('Don\'t eat that, it\'s poisoned!!!')
-  movement(currentLocation,choice)
-
-def moveBody(currentLocation):
-  choice=requestString("""When you move the body, it lets out a long breathy sigh. 
-  You jump back initially but realize it is just air escaping the body. 
-  There are no other signs of foul play on this body and the eyes of a 
-  middle-aged man stare blankly up at you. """)
-  while choice in ('forward','backward','right','left','help','solve','exit'):
-    movement(currentLocation,choice)
-  moveBody()
-  
-def toilet(currentLocation):
-  choice=requestString("Ahh, much better! Now What?")
-  while choice in ('backward','use','help','solve','exit'):
-    movement(currentLocation,choice)
-  toilet()
-
-def poison():
-  printNow("You did it! Congratulations! Now, who the hell did perpetrated this horrible crime\?")
-  
-def solved(currentLocation):
-  choice=requestString("You figured out what happened, eh? Well, how was this person murdered\?")
-  while choice in ("poison"):
-    if currentLocation == 1 and choice == "poison":
-        poison()
-    tryAgain(currentLocation)
-        
-def help(currentLocation):
-  choice=requestString("""You can try: 
-    forward
-    backward
-    right
-    left
-    eat
-    look 
-    pick
-    use
-    move
-    help
-    exit
-    solve, so now what?""")
-  movement(currentLocation,choice)    
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 ############################################################\
+# - Murder on Mason Street\
+# - by Ben Fox, Babak Rezai, James O'Dea, Caroline Lancaster\
+# - text based murder mystery\
+# - CST205 2014: Lab 12\
+#\
+# - This text based game asks the user for input and passes that\
+# - input to a move function which in turn uses current location\
+# - coupled with the input to move to the next room\
+#\
+############################################################\
+\
+\
+##Main gameplay function. Initializes variable for location and calls movement function\
+def gamePlay():\
+#sets variables for current location and flashlight inventory status\
+  currentLocation = 7 \
+  flashlight = 0\
+#requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""Welcome to Murder on Maston Street,\
+    In each room you will be told which directions you can go, '\
+    You'll be able to go forward, backward, right, or left by typing that direction "\
+    Type help to redisplay this introduction \
+    Type exit to quit at any time.\
+     \
+    Good evening detective, quite the night for a murder mystery, eh?\
+    We have a body,face down in the bedroom. The storm knocked the power \
+    out so watch your step. If you need anything let me know.\
+    Do you wish to go forward, backward right or left?""")   \
+##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+#main function to allow game movement resulting from user choice  \
+def movement(currentLocation,choice,flashlight):\
+  while choice in ('forward','backward','right','left','use','help','solve','exit'):\
+    if currentLocation == 1 and choice == 'backward':\
+        print ('okay, you move ' + choice)\
+        bedRoom(flashlight)\
+    if currentLocation == 2 and choice == 'backward':\
+        livingRoom(flashlight) \
+        print ('okay, you move ' + choice)\
+    if currentLocation == 3 and choice  == 'forward':\
+        print ('okay, you move ' + choice)\
+        bathRoom(flashlight)\
+    if currentLocation == 3 and choice  == 'right':\
+        print ('okay, you move ' + choice)\
+        livingRoom(flashlight)\
+    if currentLocation == 4 and choice  == 'forward':\
+        print ('okay, you move ' + choice)\
+        garage(flashlight)\
+    if currentLocation == 4 and choice  == 'right':\
+        print ('okay, you move ' + choice)\
+        kitchen(flashlight)\
+    if currentLocation == 4 and choice  == 'left':\
+        print ('okay, you move ' + choice)\
+        bedRoom(flashlight) \
+    if currentLocation == 4 and choice  == 'backward':\
+        print ('okay, you move ' + choice)\
+        porch(flashlight)     \
+    if currentLocation == 5 and choice  == 'left':\
+        print ('okay, you move ' + choice)\
+        livingRoom(flashlight)        \
+    if currentLocation == 6 and choice  == 'right':\
+        print ('okay, you move ' + choice) \
+        porch(flashlight)  \
+    if currentLocation == 7 and choice  == 'left':\
+        print ('okay, you move ' + choice)\
+        lawn(flashlight)   \
+    if currentLocation == 7 and choice  == 'forward':\
+        print ('okay, you move ' + choice)   \
+        livingRoom(flashlight) \
+    if currentLocation == 7 and choice  == 'right':\
+        print ('okay, you move ' + choice)   \
+        window(flashlight)  \
+    if currentLocation == 7 and choice  == 'backward':\
+        print ('okay, you move ' + choice)\
+        street(flashlight)    \
+    if currentLocation == 8 and choice  == 'left':\
+        print ('okay, you move ' + choice)  \
+        porch(flashlight)\
+    if currentLocation == 9 and choice  == 'forward':\
+        print ('okay, you move ' + choice) \
+        porch(flashlight)   \
+    if choice == 'solve':\
+        print ('okay, detective, you think you ' + choice + 'it') \
+        solved(currentLocation,flashlight)\
+    if choice == 'help':\
+        help(currentLocation,flashlight)\
+    elif choice == "exit":\
+        print('Goodbye')\
+    else: \
+     ##calls movement function which is the main function to allow movement between rooms in game\
+        movement(currentLocation,choice,flashlight)\
+    movement(currentLocation,choice,flashlight)\
+        \
+\
+##Location Functions: These functions are called for each area entered in the game based on user input and current location status\
+##a map of numbers for each room determine where you go based on choice from each room   \
+def bathRoom(flashlight):\
+#sets variable for current location\
+  currentLocation = 1 \
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""The bathroom is clean and tidy just as the rest of the home. \
+  On the floor lies an open bottle of tums with the contents strewn across the floor. \
+  They are the mint kind, yuck! You can move backward.""")\
+  if choice == 'use':\
+    choice=requestString("Ahh, much better! Now What?")\
+    ##calls movement function which is the main function to allow movement between rooms in game\
+    movement(currentLocation,choice,flashlight)\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions\
+def garage(flashlight):\
+#sets variable for current location\
+  currentLocation = 2 \
+  if flashlight == 0:\
+  #requests choice of direction from user after displaying a description of the current location\
+    choice=requestString("""You\\'ve entered the garage. It is quiet except for the feint sound of \
+    rain on the roof above. It smells of gasoline, exhaust and yard clippings in \
+    here. On the wall is a collection of tools all hung in spots with outlines to \
+    insure proper placement. One tool appears to be missing and the outline is that \
+    of a large adjustable wrench. A flashlight lies on the workbench. You can move backward""")\
+  elif flashlight == 1:\
+  #requests choice of direction from user after displaying a description of the current location\
+    choice=requestString("""You\\'ve entered the garage. It is quiet except for the feint sound of \
+    rain on the roof above. It smells of gasoline, exhaust and yard clippings in \
+    here. On the wall is a collection of tools all hung in spots with outlines to \
+    insure proper placement. One tool appears to be missing and the outline is that \
+    of a large adjustable wrench. You can move backward""")\
+  \
+  if choice == "take":\
+  #sets variable for flashlight inventory status\
+    flashlight = 1\
+    #requests choice of direction from user after displaying a description of the current location\
+    choice=requestString("you take the flashlight. Now what")\
+    movement(currentLocation,choice,flashlight)\
+  else:\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+    movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions\
+def bedRoom(flashlight):\
+#sets variable for current location\
+  currentLocation = 3 \
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""You stand in a dark bedroom. The bed is still made and a body lies \
+  face-down on the floor. There does not appear to have been a struggle and \
+  no marks are visible on the body. You can move forward or right.""")\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+  \
+  if choice == 'move':\
+  #requests choice of direction from user after displaying a description of the current location\
+      choice=requestString("""When you move the body, it lets out a long breathy sigh. \
+      You jump back initially but realize it is just air escaping the body. \
+      There are no other signs of foul play on this body and the eyes of a \
+      middle-aged man stare blankly up at you. """)\
+      movement(currentLocation,choice,flashlight)\
+      ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions  \
+def livingRoom(flashlight):\
+#sets variable for current location\
+  currentLocation = 4 \
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""You stand in silence, listening to the rain as blue and red flashes of light from the squad \
+  cars outside play blinding games on the walls of the living room. You notice a clock stopped at 10:57 \
+  on the wall and the smell of standing water assaults your nose. There is a door to the forward, an \
+  entry to the kitchen to your right and a door to the left. You can move forward, backward, right or left.""")\
+  if choice == "move":\
+     secretRoom(flashlight)\
+  else:\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+     movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions\
+def kitchen(flashlight):\
+#sets variable for current location\
+  currentLocation = 5 \
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""The kitchen is immaculate with the exception of a half-eaten \
+  sandwich on the counter. A cat clock on the wall swings its tail and \
+  eyes to the passing of time. On the refrigerator are pictures held to \
+  the surface by various magnets. A window looking out onto the street \
+  is broken but the floor under the window is spotless. You can move left.""")\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+  \
+  if choice == 'eat':\
+  #requests choice of direction from user after displaying a description of the current location\
+    choice=requestString('Don\\'t eat that, it\\'s poisoned!!! Now what?')\
+    movement(currentLocation,choice)\
+    ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice)\
+\
+\
+##Location Functions  \
+def lawn(flashlight):\
+#sets variable for current location\
+  currentLocation = 6\
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""You are on the front lawn of the home. It is nicely manicured \
+  and a small garden gnome stares happily into the dark, rainy night. You can move right.""")\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions  \
+def porch(flashlight):\
+#sets variable for current location\
+  currentLocation = 7\
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""...You stand back on the porch of a small home in a suburb of Los Angeles. \
+    It is cold and rainy and to the forward is a dark living room. \
+    An officer stands next to you writing on a notepad. You can move forward, backward, right or left.""")\
+    ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions\
+def window(flashlight):\
+#sets variable for current location\
+  currentLocation = 8\
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""You stand to the right (right) of the porch in a muddy planter. \
+  The window above the planter is broken and markers placed by the officers \
+  here before you indicate foot prints made in the mud under the window were \
+  made by boot-covered feet. There is glass pieces scattered in the mud. \
+  You can move left.""")\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions  \
+def street(flashlight):\
+#sets variable for current location\
+  currentLocation = 9\
+  #requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("""There is nothing here but cold rain and parked squad cars with lights flashing. \
+  It?s too early in the morning for anyone to be out but you do notice a few people peeking out \
+  from behind drawn curtains of neighborhood homes. The officers you met here said they \
+  interviewed everyone and no one saw or heard anything. You can move forward.""")\
+  ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Location Functions  \
+def secretRoom(flashlight):\
+#sets variable for current location\
+ currentLocation = 10\
+ if flashlight == 1:\
+ #requests choice of direction from user after displaying a description of the current location\
+   choice=requestString("""You enter a dark secret room.You flick on the flashlight you took \
+   from the garage and are horrified to see body parts hanging throughout the room.\
+   The smell of standing water and rotting flesh turns your stomach. You race back upstairs to vomit.""")\
+ else:\
+   choice=requestString("You enter a dark secret room. It is pitch black in here and you can't see a thing.")\
+   ##calls movement function which is the main function to allow movement between rooms in game\
+ movement(currentLocation,choice,flashlight)\
+\
+\
+##Object or Action Functions: These functions are for the actions or objects the player can interact with in each room\
+def solved(currentLocation,flashlight):\
+#requests choice of direction from user after displaying a description of the current location\
+  choice=requestString("You figured out what happened, eh? Well, how was this person murdered\\?")\
+  if currentLocation == 1 and choice == "poison":\
+       printNow("You did it! Congratulations! Now, who the hell did perpetrated this horrible crime\\?")\
+       ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight)\
+\
+\
+##Object or Action Functions        \
+def help(currentLocation,flashlight):\
+#requests choice of direction from user after displaying available commands\
+  choice=requestString("""You can try: \
+    forward\
+    backward\
+    right\
+    left\
+    eat\
+    look \
+    pick\
+    use\
+    move\
+    help\
+    exit\
+    solve, so now what?""")\
+    ##calls movement function which is the main function to allow movement between rooms in game\
+  movement(currentLocation,choice,flashlight) \
+}
