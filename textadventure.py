@@ -164,7 +164,7 @@ def window():
 def street():
   currentLocation = 9
   choice=requestString("""There is nothing here but cold rain and parked squad cars with lights flashing. 
-  It?s too early in the morning for anyone to be out but you do notice a few people peeking out 
+  It\'s too early in the morning for anyone to be out but you do notice a few people peeking out 
   from behind drawn curtains of neighborhood homes. The officers you met here said they 
   interviewed everyone and no one saw or heard anything. You can move forward.""")
   movement(currentLocation,choice)
