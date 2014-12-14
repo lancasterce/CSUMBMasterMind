@@ -1,29 +1,28 @@
 from cmath import exp, pi
-import random
 
 soundArr = []
-# lower its intensity by half
-sound = makeEmptySound(14)
-for i in range( 1 , getLength( sound ) ):
-  value = random.randint(-16000,1600)
-  setSampleValueAt(sound, i, value)
-  soundArr.append(value)
+fileName=pickAFile()
+sound=makeSound(fileName)
+for i in range( 0 , getLength(sound) ):
+ value =getSampleValueAt(sound,i)
+ soundArr.append(value)
 
-printNow(soundArr)
+x = len(soundArr)
+next = 2**(math.ceil(math.log(x, 2)))
+printNow(next)
 
-l = (len(soundArr))
-i = l - (l%8)
-del soundArr[i:]
-    
+nsoundArr = [0] * int(next)
+for index, i in enumerate(soundArr):
+  nsoundArr[index] = soundArr[index]
+   
 def fft(x):
-    N = len(x)
-    if N <= 1: return x
-    even = fft(x[0::2])
-    odd =  fft(x[1::2])
-    T= [exp(-2j*pi*k/N)*odd[k] for k in xrange(N/2)]
-    print(k, N)
-    return [even[k] + T[k] for k in xrange(N/2)] + \
-           [even[k] - T[k] for k in xrange(N/2)]
- 
+   N = len(x)
+   if N <= 1: return x
+   even = fft(x[0::2])
+   odd =  fft(x[1::2])
+   T= [exp(-2j*pi*k/N)*odd[k] for k in xrange(N/2)]
+   return [even[k] + T[k] for k in xrange(N/2)] + \
+          [even[k] - T[k] for k in xrange(N/2)]
+
 print( ' '.join("%5.3f" % abs(f) 
-                for f in fft(soundArr)) )
+               for f in fft(nsoundArr)) )
