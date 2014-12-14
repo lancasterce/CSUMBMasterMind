@@ -1,0 +1,29 @@
+from cmath import exp, pi
+import random
+
+soundArr = []
+# lower its intensity by half
+sound = makeEmptySound(14)
+for i in range( 1 , getLength( sound ) ):
+  value = random.randint(-16000,1600)
+  setSampleValueAt(sound, i, value)
+  soundArr.append(value)
+
+printNow(soundArr)
+
+l = (len(soundArr))
+i = l - (l%8)
+del soundArr[i:]
+    
+def fft(x):
+    N = len(x)
+    if N <= 1: return x
+    even = fft(x[0::2])
+    odd =  fft(x[1::2])
+    T= [exp(-2j*pi*k/N)*odd[k] for k in xrange(N/2)]
+    print(k, N)
+    return [even[k] + T[k] for k in xrange(N/2)] + \
+           [even[k] - T[k] for k in xrange(N/2)]
+ 
+print( ' '.join("%5.3f" % abs(f) 
+                for f in fft(soundArr)) )
