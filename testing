@@ -9,7 +9,6 @@ for i in range( 0 , getLength(sound) ):
 
 x = len(soundArr)
 next = 2**(math.ceil(math.log(x, 2)))
-printNow(next)
 
 nsoundArr = [0] * int(next)
 for index, i in enumerate(soundArr):
@@ -24,5 +23,6 @@ def fft(x):
    return [even[k] + T[k] for k in xrange(N/2)] + \
           [even[k] - T[k] for k in xrange(N/2)]
 
-print( ' '.join("%5.3f" % abs(f) 
-               for f in fft(nsoundArr)) )
+transformed = fft(nsoundArr)
+
+print fft(nsoundArr)
