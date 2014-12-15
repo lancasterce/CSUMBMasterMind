@@ -1,19 +1,33 @@
+## Fourier Sound Processing
+## 1. Open sound file
+## 2. Extract sound values into soundArr
+## 3. Create nsoundArr of size 2^x to pad
+## Note: Fast fourier transform needs 2^x inputs
+## 4. Scale from 0 to 765 ( 255 * 3 )
+## 5. Calculate number of bins
+## 6. Generate histogram
+
 from cmath import exp, pi
 
+## Open sound file, get array of data
 soundArr = []
 fileName=pickAFile()
 sound=makeSound(fileName)
 for i in range( 0 , getLength(sound) ):
- value =getSampleValueAt(sound,i)
+ value = getSampleValueAt(sound,i)
  soundArr.append(value)
 
+## Create array size of 2^x
+## insert array into the new
+## resulting in zero padding
 x = len(soundArr)
 next = 2**(math.ceil(math.log(x, 2)))
-
 nsoundArr = [0] * int(next)
 for index, i in enumerate(soundArr):
   nsoundArr[index] = soundArr[index]
-   
+
+## Calculate the discreet fast fourier transform
+## Based on Cooley Tukey FFT algorithm
 def fft(x):
    N = len(x)
    if N <= 1: return x
@@ -23,6 +37,60 @@ def fft(x):
    return [even[k] + T[k] for k in xrange(N/2)] + \
           [even[k] - T[k] for k in xrange(N/2)]
 
-transformed = fft(nsoundArr)
+def translate(value, low, high, t_lower, t_upper):
+    # Figure out how 'wide' each range is
+    leftSpan = high - low
+    rightSpan = t_upper - t_lower
 
-print fft(nsoundArr)
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - low) / float(leftSpan)
+
+    # Convert the 0-1 range into a value in the right range.
+    return t_lower + (valueScaled * rightSpan)
+    
+#Calculate the color value for each pixel
+def getColor(imgPixel):
+  if imgPixel <= 255
+    color = (value, 0, 0)
+  elif imgPixel <= 510:
+    color = (255, (255 - imgPixel). 0 )
+  else: # Color must be imgPixel - 2*255
+    color = (255, 255, (imgPixel - 2 * 255))
+  
+  return color
+  
+## Perform the fast fourier transform on the data
+## python can not unpack the array because of the size
+freq = []
+freq_img = fft(nsoundArr)
+for coord in freq_img:
+  freq.append(coord.real)
+
+## Scale the transform values
+## from 0 to 765
+imgPixels = []
+imgColors = []
+maxFreq = max(freq)
+minFreq = min(freq)
+
+for f in freq:
+  imgPixels.append(translate(f,minFreq,maxFreq,0,765))
+
+for item in imgPixels:
+  imgColors.append(getColors(item))
+
+width = round(sqrt(len(imgColors)))
+height = round(sqrt(len(imgColors)))
+
+index = 0 
+spectrogram = makeEmptyPicture(width, height, white)
+for x in range(0, width):
+  for y in range(0, height):
+  getPixelAt(spectrogram,x,y)
+  
+  
+  
+  
+printNow(int(max(imgPixels)))
+printNow(int(min(imgPixels)))
+ 
