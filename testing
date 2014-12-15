@@ -51,11 +51,11 @@ def translate(value, low, high, t_lower, t_upper):
 #Calculate the color value for each pixel
 def getColor(imgPixel):
   if imgPixel <= 255:
-    color = (value, 0, 0)
+    color = (255 - value, 255, 255)
   elif imgPixel <= 510:
-    color = (255, (255 - imgPixel), 0 )
+    color = (255, (255 - imgPixel), 255 )
   else: # Color must be imgPixel - 2*255
-    color = (255, 255, (imgPixel - 2 * 255))
+    color = (255, 255, (255*2 - imgPixel))
   
   return color
   
@@ -86,10 +86,13 @@ index = 0
 spectrogram = makeEmptyPicture(width, height, white)
 for x in range(0, width):
   for y in range(0, height):
-    setColor(getPixelAt(spectrogram,x,y), imgColors[i])
-    i = i + 1
-    
-  
+    if i < len(imgColors):
+      pixel = getPixelAt(spectrogram,x,y)
+      newColor = makeColor(imgColors[i][0],imgColors[i][1],imgColors[i][2])
+      setColor(pixel, newColor)
+      i = i + 1
+
+show(spectrogram)
   
         
 printNow(int(max(imgPixels)))
