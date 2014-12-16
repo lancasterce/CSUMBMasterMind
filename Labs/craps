@@ -1,0 +1,17 @@
+import random
+def craps():
+  game = 'lose'
+  #raw_input("Press enter to roll... ")
+  while game == 'lose':
+    die1 = random.randint(1,6)
+    die2 = random.randint(1,6)
+    val = die1 + die2
+    print "You rolled", die1, "+", die2, " which is", val
+    while game = :
+      if val == 7 or val == 11:
+        game = 'win'
+        print "you win"
+      else:
+        game = 'lose'
+        print "you lose"
+        craps()
