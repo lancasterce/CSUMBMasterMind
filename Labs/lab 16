@@ -1,0 +1,71 @@
+def headlines():
+  #source: http://otterrealm.com/author/theotterrealm/
+  file = "Users/Lancasters/Desktop/CNN.html"
+  openFile = open(file, "rt")
+  text = openFile.read()
+
+# find index of substring
+  startLocation = -1
+  startIndices = []
+  while true:
+    startLocation = text.find("<h3 class=\"archive_title\" id=\"post-", startLocation + 1)
+    if startLocation == -1:
+      break
+    #adjust starting index to begin at ">"
+    startLocation = text.find(">", startLocation+1)
+    if startLocation == -1:
+      break
+    startLocation = text.find(">", startLocation+1)
+    if startLocation == -1:
+      break
+    startIndices.append(startLocation)
+        
+  endLocation = -1
+  endIndices = []
+
+  while true:
+    endLocation = text.find("/h3", endLocation + 1)
+    if endLocation == -1:
+      break
+
+    if endLocation >= startIndices[0]:
+      endIndices.append(endLocation)
+
+  for i in range(0, len(startIndices)):
+    print text[startIndices[i]:endIndices[i]-25].lstrip(">").lstrip()
+    #print text[startIndices[i]+100:endIndices[i]-25]
+    
+  
+    
+      
+def html():         
+ import urllib                                       
+ sock = urllib.urlopen("http://cnn.com/") 
+ htmlSource = sock.read()                            
+ sock.close()                                        
+ print htmlSource 
+ 
+def html2():
+  # get code of given URL as html text string
+  # Python3 uses urllib.request.urlopen()
+  # instead of Python2's urllib.urlopen() or urllib2.urlopen()
+  import urllib
+  fp = urllib.urlopen("http://www.cnn.com")
+  mybytes = fp.read()
+  stringName += "<h3> + </h3>"
+  mystr = mybytes.decode()
+  fp.close()
+  print(mystr)
+ 
+ 
+def html2():
+  # get code of given URL as html text string
+  # Python3 uses urllib.request.urlopen()
+  # instead of Python2's urllib.urlopen() or urllib2.urlopen()
+  import urllib
+  fp = urllib.urlopen("http://www.cnn.com")
+  mybytes = fp.read()
+  stringName += "<h3> + </h3>"
+  mystr = mybytes.decode()
+  fp.close()
+  print(mystr)
