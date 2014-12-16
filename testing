@@ -51,11 +51,11 @@ def translate(value, low, high, t_lower, t_upper):
 #Calculate the color value for each pixel
 def getColor(imgPixel):
   if imgPixel <= 255:
-    color = (255 - imgPixel, 255, 255)
+    color = (imgPixel, 255, 255)
   elif imgPixel <= 510:
-    color = (255, (255 - imgPixel), 255 )
+    color = (255, (510 - imgPixel),255)
   else: # Color must be imgPixel - 2*255
-    color = (255, 255, (255*2 - imgPixel))
+    color = (255, 255, (756 - imgPixel))
   
   return color
   
@@ -77,7 +77,7 @@ for f in freq:
   imgPixels.append(translate(f,minFreq,maxFreq,0,765))
 
 for item in imgPixels:
-  imgColors.append(getColor(item))
+  imgColors.append(getColor(round(item)))
 
 width = int(round(sqrt(len(imgColors))))
 height = int(round(sqrt(len(imgColors))))
@@ -91,5 +91,5 @@ for x in range(0, width):
       newColor = makeColor(imgColors[i][0],imgColors[i][1],imgColors[i][2])
       setColor(pixel, newColor)
       i = i + 1
-
+      
 show(spectrogram)
