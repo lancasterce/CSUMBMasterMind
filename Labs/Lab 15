@@ -1,28 +1,30 @@
 #######################################################
 # Lab - 15 Team Mastermind                                                    
 #Caroline Lancaster, Babak Rezai, James O'Dea, Ben Fox
-#Lab consists of 
-#
-#
+#Lab consists of a craps game, display calendar, days 
+#to birth and the constitution problem showing which 
+#week day a day falls on.
 #
 #
 #######################################################
+
+
 
 import random
 
 first = 0
 point = 0
 def craps(first, point):
-  lastPoint = point
   roll = raw_input("Hit ENTER to roll...")
   if roll == roll:
     game = 'lose'
     die1 = random.randint(1,6)
     die2 = random.randint(1,6)
     val = die1 + die2
+    lastPoint = val
   print "You rolled", die1, "+", die2, " which is", val
   while game == 'lose':
-   if val == 7 or val == 11:
+   if val == 7 or val == 11 and first == 0:
      game = 'win'
      print "you win"
      break
@@ -44,6 +46,7 @@ def craps(first, point):
    if val == lastPoint and first == 1:
      print "you win, made your point"
      break
+    
 
 def calendar():
  import calendar
